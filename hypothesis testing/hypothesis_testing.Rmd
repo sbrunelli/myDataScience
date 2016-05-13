@@ -16,23 +16,23 @@ the MLB (Major League Baseball). We'll pretend to be interested in formally answ
 
   >*are the teams making the postseason spending more money for players salaries than those who don't?*
   
-I know, I know, it's a pretty rethorical question, but indeed, this is intentional.
+I know, I know, it's a pretty rhetorical question, but indeed, this is intentional.
 To answer it we'll use the History of Baseball data sets provided by Kaggle: it contains a complete history of major league baseball 
 stats from 1871 to 2015, just what we need to have some fun with data!
 
 ##The method
 First of all we state the test hypothesis and set parameters.
 
-Under the **NULL Hypothesis** (*H0*) we state that total amount payed in salaries by the teams who qualify for the playoffs, is the same as those payed by teams who don't qualify for the playoffs, whereas under the  **Alternative Hypothesis** (*Ha*) we state that the teams who qualify for the playoffs pay higher salaries. In order to set up these hypothesis we need to divide the population of all MLB teams from 1871 to 2015 into two groups: postseason_teams and regular_season_teams and calculate the average of total salaries for the two groups. These are the quantitative variables that will be used for our hypothesis
+Under the **NULL Hypothesis** ($H_{0}$) we state that total amount payed in salaries by the teams who qualify for the playoffs, is the same as those payed by teams who don't qualify for the playoffs, whereas under the  **Alternative Hypothesis** ($H_{a}$) we state that the teams who qualify for the playoffs pay higher salaries. In order to set up these hypothesis we need to divide the population of all MLB teams from 1871 to 2015 into two groups: postseason_teams and regular_season_teams and calculate the average of total salaries for the two groups. These are the quantitative variables that will be used for our hypothesis
 
-  * ![Null-hypothesis](http://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5Cbg_white%20%24H_0%3A%20%5Cmu_%7Bps%7D%20%3D%20%5Cmu_%7Brs%7D%24)
-  * ![Alternative Hypothesis](http://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5Cbg_white%20%24H_a%3A%20%5Cmu_%7Bps%7D%20%3E%20%5Cmu_%7Brs%7D%24)
+  * $H_{0}: \mu_{ps} = \mu_{rs}$
+  * $H_{a}: \mu_{ps} > \mu_{rs}$
   
-Note: ps = Post Season Teams, rs = Regular Season Teams (didn't make it to the playoffs)
+Note: $ps$ = Post Season Teams, $rs$ = Regular Season Teams (didn't make it to the playoffs)
 
 This is going to be right-sided test, because of the Alternative Hypothesis.
 
-We set a **Level of Significance** *alpha* for the test of 0.05.
+We set a **Level of Significance** $\alpha$ for the test of 0.05.
 
 ###A comment to the method
 In hypothesis testing we start by stating that the NULL Hypothesis is true.
@@ -62,7 +62,7 @@ The preparation steps are essentially three:
     * PCT: percentage of victories
     * salary: original salary cap
     * cpi: consumer price index
-    * adj_salary: adjusted salary cap to the 2015 consumer price index
+    * adj_salary: adjusted salary cap to the 2015 consumer price index (in millions of dollars)
 
 3. Divide the teams into two groups: those who qualified for the postseason and those who didn't.
 
@@ -73,7 +73,7 @@ source("hypothesis_testing.R")
 ```
 
 ```{r}
-head(all_teams, 5)
+head(postseason_teams, 5)
 ```
 
 ##The Test
@@ -84,33 +84,36 @@ First of all we need to check and see, whether the data have the necessary preco
 The **first condition** is that the **samples are independent** and we will consider them so, even if this may be a bit far fetched.
 
 The **second condition** is that **sampling distributions are approximately normal**. 
-We can check that directly, letting R draw the histograms of the two groups.
+We can check that directly, letting R draw the histograms of the two groups (Figure 1).
 
 ![](./images/histograms.png) 
 
-They look normal enogh, for the purposes of this demonstration, even if the Regular Season Salary distribution has a right skew.
+They look normal enough, for the purposes of this demonstration, even if the Regular Season Salary distribution has a right skew.
 
 In order to give NULL and Alternative Hypothesis real numbers, we need the mean salaries of each group, and most importantly their difference.
-The statistical test is a comparison of the means between these two groups and an attempt to see if there is enough statistical evidence to conclude that the observed difference is due to an actual effect in the population (of all possibile infinite MLB teams), or if it is due to sampling error and chance.
+The statistical test is a comparison of the means between these two groups and an attempt to see if there is enough statistical evidence to conclude that the observed difference is due to an actual effect in the population (of all possible infinite MLB teams), or if it is due to sampling error and chance.
 
 ```{r}
 mu_ps <- mean(postseason_teams$adj_salary)
 mu_rs <- mean(regular_season_teams$adj_salary)
 difference <- mu_ps - mu_rs
-three_stats <- round(c("Avg. Sal. Postseas" = mu_ps, "Avg. Sal. Regseas" = mu_rs, "Difference" = difference), digits = 3)
+three_stats <- round(c("Avg. Sal. Postseas" = mu_ps,
+                       "Avg. Sal. Regseas" = mu_rs, 
+                       "Difference" = difference), 
+                     digits = 3)
 three_stats
 ```
 
 The Hypothesis, reformulated are
 
-  * ![H0-difference](http://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5Cbg_white%20%24H_0%3A%20difference%20%3D%200%24)
-  * ![Ha-difference](http://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B120%7D%20%5Cbg_white%20%24H_a%3A%20difference%20%3E%200%24)
+  * $H_{0}: difference = 0$
+  * $H_{a}: difference > 0$
 
 We perform a t-test.
 
 The formula for the test statistic is
 
-![test-statistic](http://latex.codecogs.com/png.latex?%5Cinline%20%5Cdpi%7B200%7D%20%5Cbg_white%20%5Clarge%20t%20%3D%20%5Cfrac%7Bdifference%7D%7B%5Csqrt%7B%5Cfrac%7Bsd_%7Bps%7D%5E2%7D%7Bn_%7Bps%7D%7D%20&plus;%20%5Cfrac%7Bsd_%7Brs%7D%5E2%7D%7Bn_%7Brs%7D%7D%7D%7D%20%3D%20%5Cfrac%7Bdifference%7D%7Bstandard%20error%7D)
+$t = \frac{difference}{\sqrt{\frac{sd_{ps}^2}{n_{ps}} + \frac{sd_{rs}^2}{n_{rs}}}} = \frac{difference}{standard\,\,error}$
 
 Here's the evaluation of all required variables
 
@@ -129,17 +132,17 @@ t <- round(difference / se, digits = 2)
 t
 ```
 
-Now there are 3 ways to use this test statistics in order to either reject the NULL Hypothesis in favor of the Alternative Hypothesis, or fail to reject it and thus fail to reach evidence:
+Now there are 3 ways to use this test statistic in order to either reject the NULL Hypothesis in favor of the Alternative Hypothesis, or fail to reject it and thus fail to reach evidence:
 
-1. we calculate a p-value and compare it to the given Level of Significance. If the p-value is less than the Level of Significance, then we reject H0, oherwise we fail to reject it.
+1. We calculate a p-value and compare it to the given Level of Significance. If the p-value is less than the Level of Significance, then we reject $H_{0}$, otherwise we fail to reject it.
 
-2. We calculate the cut-off value and see whether our test statistic falls within the rejection region. If it does, then we reject H0, otherwise we fail to reject it.
+2. We calculate the cut-off value and see whether our test statistic falls within the rejection region. If it does, then we reject $H_{0}$, otherwise we fail to reject it.
 
-3. We calculate a confidence interval for the difference of the means and see whether it contains the value 0. If it doesn't, then we reject H0, otherwise we fail to reject it.
+3. We calculate a confidence interval for the difference of the means and see whether it contains the value 0. If it doesn't, then we reject $H_{0}$, otherwise we fail to reject it.
 
 They all lead to the same conclusion and we'll test them all.
 
-The **p-value**:
+##P-value
 
 ```{r echo = FALSE}
 p_value <- pt(q = t, df = df, lower.tail = FALSE)
@@ -150,7 +153,7 @@ if (p_value < alpha) {
 }
 ```
 
-The **cut-off value**:
+#Cut-off value
 
 ```{r echo = FALSE}
 cutoff <- qt(p = (1-alpha), df = df)
@@ -162,11 +165,11 @@ if(t > cutoff) {
 
 ```
 
-We can see graphically too, that the t-value falls in the rejection region
+We can see graphically in Figure 2 at the end of this document, that the t-value falls in the rejection region
 
 ![](./images/rejection_region.png)
 
-The **confidence interval**:
+##Confidence interval
 
 ```{r echo = FALSE}
 t_demi_alpha <- qt(p = (1 - alpha/2), df = df)
@@ -180,7 +183,7 @@ if ( (lower_bound <= 0) & (0 <= upper_bound) ) {
 } 
 ```
 
-We can see graphically, that 0 is indeed not contained in the Confidernce Interval, thus allowing us to rejectH0.
+We can see graphically in Figure 3 at the end of this document, that 0 is indeed not contained in the Confidence Interval, thus allowing us to reject H0.
 
 ![](./images/confidence_interval.png)
 

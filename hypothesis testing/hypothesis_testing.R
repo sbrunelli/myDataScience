@@ -146,7 +146,7 @@ with(ndist, polygon(x=c(x[c(x1,x1:x2,x2)]), y= c(0, y[x1:x2], 0), col="gray"))
 abline(v = x[x1], lwd = 1, col = "gray", lty = 2)
 text(x[x1+500], 0.125, "rejection region")
 abline(v = t, lwd = 1, col = "gray", lty = 2)
-text(x[x1+4800], 0.125, paste("t =",round(cutoff, digits = 3)))
+text(x[x1+4800], 0.125, paste("t =",round(t, digits = 3)))
 dev.off()
 
 png("./images/confidence_interval.png")
