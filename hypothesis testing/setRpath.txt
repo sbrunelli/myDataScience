@@ -1,0 +1,1 @@
+setwd("C:/Users/LLI/Documents/Education/data science/Blog")
