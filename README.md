@@ -23,10 +23,10 @@ That said the main tools will be:
 #Section 1: Examples
 Here's the list of currently available examples:
 
-* [Hypothesis Testing](./hypothesis testing): an example of the application of hypothesis testing to establish if the difference in two groups is statistically significant. **Business Question** : "Using the data from the Major League Basebell are the teams making the postseason spending more money for players salaries than those who don't?"
+* [Hypothesis Testing](./hypothesis testing): an example of the application of hypothesis testing to establish if the difference in two groups is statistically significant. **Business Question** : "Using the data from the Major League Basebell are the teams making the postseason spending more money for players salaries than those who don't?" (Follow the link and click on the .pdf file)
 	
 	
 #Section 2: Business
 Here's the list of currently available real life applications of the techniques:
 
-* [Is IBM's Dynamic Cubes faster than Oracle's Query Rewrite?](./performance evaluation): a customer has performances issues with its reports and dashboards and has to decide which technology to adopt. In a case where there's no clear winner, can we still make a scientific statement?
+* [Is IBM's Dynamic Cubes faster than Oracle's Query Rewrite?](./performance evaluation): a customer has performances issues with its reports and dashboards and has to decide which technology to adopt. In a case where there's no clear winner, can we still make a scientific statement? (Follow the link and click on the .md file or the .pdf file)
