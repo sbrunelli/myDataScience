@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Oracle Query Rewrite vs IBM Dynamic Cubes</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Oracle Query Rewrite vs IBM Dynamic Cubes</h1>
+
+<h3>A Scientifc Approach to Technology Evaluation in IT</h3>
+
+<h2>Introduction</h2>
+
+<p>In this document I would like to apply the Hypothesis Testing methodology to a use case: the evaluation of 2 different technologies from a performance point of view.</p>
+
+<p>This is something that recently happened in the real life on a customer, and that gave me the possibility to bring a little bit of statistics in the backrooms of an otherwise very conservative IT department.</p>
+
+<p>In order to improve the performances of a set of strategic Dashboards we have been challenged to come up with possible solutions. After an initial assessment, and taking into consideration the specificities of the customer, we selected 2 candidates for the real assessment:</p>
+
+<ul>
+<li><p>The Aggregate Awareness Technology from Oracle (Query Rewrite)</p></li>
+<li><p>The In-Memory Technology from IBM (Cognos Dynamic CUbes)</p></li>
+</ul>
+
+<p>One Dashboard has been selected for the implementation with both alternatives. </p>
+
+<p>After completing the development of the POT (Proof of Technology), we started to make tests in the IT classical way, that is without a clear strategy as to how to make them. </p>
+
+<p>The results were very conflicting: under certain circumstances Query Rewriter outperformed Dynamic Cubes, under other circumstances it was the other way around. In general we had the impression that Cognos Dynamic Cubes was slightly faster, but again, not always and not always by that much.</p>
+
+<p>In order to be able to establish scientifically which choice was better, if any at all, and by how much qualitatively at least, we had to resort to a more scientifically approach. Put down in statistical terms we had to perform a comparison of 2 different sample means. </p>
+
+<h2>Data Collection Strategy</h2>
+
+<p>The most important point is definitely the data collection strategy: performance data must be gathered in a way such that the samples are representative and independent. </p>
+
+<p>The most important points to take into consideration are:</p>
+
+<ol>
+<li><p>Gather a sufficient number of cases, so that the samples are significant, in a reasonable amount of time</p></li>
+<li><p>Avoid caching effects from the database</p></li>
+<li><p>Run the dashboard with different users</p></li>
+<li><p>Run the dashboard at different times during the day and at different days of the week</p></li>
+<li><p>Avoid to run the two versions (QR and DC) one after the other to account for independence of the samples</p></li>
+</ol>
+
+<p>In order to fulfill the requirements of these requirements we made these choices:</p>
+
+<ul>
+<li><p>Each sample contained at least 30 observations, gathered over different sampling windows. Each lot of dashboard run, was made of 3 successive executions</p></li>
+<li><p>Between each lot, since it was not possible to clear Oracle&#39;s Buffer Cache, we had to schedule at least one hour</p></li>
+<li><p>Three users have been used for the tests. Each lot has seen random with possible replacement selection to users, meaning one user can be selected for multiple runs within the same lot</p></li>
+<li><p>Runs covered times between 09:00 AM and 16:00 AM East European Time</p></li>
+<li><p>Runs were taken from Monday through Wednesday</p></li>
+</ul>
+
+<p>The collected data for the evaluation are available on the repository page.</p>
+
+<p>Here&#39;s how they look like.</p>
+
+<pre><code>##   day  time    technology   user lot_runid elapsed
+## 1 Wed 10:00 Query Rewrite User 3         1    15.7
+## 2 Mon 09:00 Query Rewrite User 1         1    16.2
+## 3 Fri 14:00 Dynamic Cubes User 3         1     5.2
+</code></pre>
+
+<h2>Dataset Codebook</h2>
+
+<p>The dataset contains 6 variables:</p>
+
+<ol>
+<li><strong>day</strong>: categorical ordinal variable with the string short name of week day</li>
+<li><strong>time</strong>: categorical ordinal variable with the string representation of the time of the day</li>
+<li><strong>technology</strong>: categorical nominal variable with the technology name</li>
+<li><strong>user</strong>: categorical nominal variable with the user Id</li>
+<li><strong>lotid</strong>: quantitative interval variable with the Id of a sample dashboard execution within the same lot</li>
+<li><strong>elapsed</strong>: quantitative ration variable with the elapsed time for the dashboard execution expression in seconds</li>
+</ol>
+
+<h2>Exploratory Data Analysis of the Collected Data</h2>
+
+<p>Before presenting our conclusions some exploratory plots, that gave us some interesting inside into the results.</p>
+
+<h3>Query Rewrite</h3>
+
+<p>First of all we analyze the data for the Query Rewrite against all available variables.</p>
+
+<p><img src="data:image/png;base64,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AnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihCgT+uK6q6nb5W3aHr8lVlI78JfFuOj303xVc3f1dlWP7vhH2iqZiUjDwmy7/xXSe7++eNKXzVqNh3utdI5QFfsi+/777zenh7un5fjOeqG52fZfoUh0P3x7638Px8+mh9L7/M1sN4LsfTfX9urr7y/Bd4ecU28tGaLsmuv2x+8e0pZgVEnz34/jrXX8517eHsQ8836/a+mZ3vti7fx3X/f+bAfXt4e3Xca3vMgnrDfzdU12t3uXWThuhO95f/dOW4lZI8H2CXfZVj3Zbj1f32J9fc942v/rdtrnZ9ce7hM+/jut/fsh7sH8DvxkHvtcU22kj9H8NF8RlS3ErdI9f3x72/bC22q/6432W3fVwzvn0sKlX9abue0WvzflXvzT0P+v51Bz4Mbd22gj9X3U/IFy2FLfCgt++XM71zW+GLnx5sbf7vr//6nfDyPdyeijdrYiz7vILPX7UbI+fthS3QoLv06m2z/fDGPeC9P30Nhzuuvd2sB9m/NdfARa6HjUD/pxbO22E8xw/bSluBd7H90vXn7rEX7cu49L25c8+4/7/YYIb26o6XwZ5b+lmwL+k2E4bYVzVX7UUsyK9cjes8yAD+WqpOODrzNdq4eStpfBavVABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFABvFDZg6+yE2NrZaflVOyTd2m5GOIEz+cqjAA+OVdhBPDJuQojgE/OVRiVDl65oMkbvH6ZpixNOMNXIpQWapY3eLewRPBNtaqvHt0SAj6l3EODP3051Kv2+dPls1sxhzvS1pRU4Si5809WNPBd2s2mbwKmWjhKG5gTfLTc50Kk2eMNu6O7qL7z6fFOIWYZBJjj/bdJUPDR5ni3EOaThE0cZadWhGAaEsKCnzrxPqC9BGItHWA7R52BGYXtHBP45/vhKr81WuAUBt4qd98KDb49fpj5FI6oIy4lAi0wa+6OCv4CTlvPfLReNPBBt3OMudutb1LYznGVYFJg8LyujEtmB7607RyzKyfw9DAAH7cKosH7n+N9BeZwBfAelfIcHygswPsJDPAEAXyEsEWAx3aOMyz28dQquL0us1g4O/Ait3P0yXexdHmremcBvH2YFMCXuI8HeKHb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ovd0Te31yngcvGwuz3YnHv/86en13L66/YNH8PWmr0/dB9o8f3p6/fP66jz9qb85e/yptBxNxkQNDJ9/v65Wao8mYhrqb4ebkefA/+/H9n9+/rxrhj7SDcivF+yLRq7fHLoTWvC9l8mHCz9/+r9PX7/895fDeK7vOD/4BL/t77zuh/qfNq9/jj+vbMdj5zMqy/HQfrymdYZN1+uHNlDG1oqvx89eeccPHZT/+vp511e12cyRfcdVC76uqqsu/8tfN239n//ajuf6OD6H+rc06037bgCY63WX4BWWL+S0Ll8MG21srbyDf6r/7T9Orz1eA/7D00x3HQ2GU81merKfY7rJ5Pcvs3wX52pM4dR5Vn0ZV5Tz7AV4leXQkTdn8EaGuvWFXv7Bd2vu0+scrwbfjaAzE/RgcD61v17h998UNVAYz3WLXNVS0lkvS+kuVP+cjWpl/QZeYzkYDg1kaLjRxtYK+3ihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnihAnih+n/MwYX2tfHf/wAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-3"/></p>
+
+<p>A very interesting pattern emerges when looking at the lotid plot: the first execution seems to be significantly slower than immediate subsequent executions. This seems easily explained in terms of the caching effect. </p>
+
+<p>The question for our engineers is now how is it possible to make sure that the necessary data for the dashboard execution get preloaded in the cache, so that we can achieve the average performances of lotid 2 and 3, instead of those of lotid 1?</p>
+
+<p>Since it&#39;s not an article on database infrastructure optimization I&#39;ll skip on that part as it would probably require an article of its own.</p>
+
+<p>No significant patterns emerge from the other 3 variables.</p>
+
+<h3>Dynamic Cubes</h3>
+
+<p>Let&#39;s do the same plots for the other technology under evaluation now.</p>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-4"/></p>
+
+<p>First of all we observe that we don&#39;t see that same effect for the lotid variable, as in the previous case.</p>
+
+<p>Each one of the boxplots presents significant outliers, and that will be explained later on in the article. What we interested in now is that there are no significant pattern that we would like to further analyze here.</p>
+
+<h2>Technology Evaluation</h2>
+
+<p>It&#39;s now time to take a look at the 2 technologies one against the other, and answer the original question of the article: which one is better?</p>
+
+<p>Let&#39;s graphically compare the 2 distributions.</p>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-5"/></p>
+
+<p>Now we see the very interesting and a misleading pattern that brought us to need a statistical approach to decide which technology is better: Dynamic Cubes have a lower median, and even the third quartile of that distribution is at almost the same level as the lower whisker of the Query Rewrite distribution.</p>
+
+<p>But what are those terrible outliers? 
+Do they influence our decision?
+Can we get rid of them?</p>
+
+<h3>What are those terrible outliers?</h3>
+
+<p>Dynamic Cubes is the in-memory offer of IBM for Datawarehouses. By using advanced techniques to populate the server&#39;s memory it can speed up by a significant amount reports and dashboards executions against relational data residing in a classical DWH Star Schema (possibly dimensionally modeled to make our life easier).</p>
+
+<p>This memory is used as a cache by the queries generated by the front end tools: every time a report requires data that are already in memory we <strong>hit the cache</strong>, thus saving execution time. When on the contrary the data are not in the cache we than <strong>miss the cache</strong> and DC has to issues slow query to the relational engine, load the data into memory (the cache) and than answer the report.</p>
+
+<p>Those outlier are all <strong>cache misses</strong>.</p>
+
+<h3>Do they influence our decision?</h3>
+
+<p>For that we&#39;ll run a simple T-Test for the comparison of these two population means.
+It&#39;s a T test because we don&#39;t know the true populations standard deviations and we will estimate them using the sample standard deviations, therefore we have to account for that additional estimation error.</p>
+
+<p>Our NULL Hypothesis \(H_{0}\) will be that there is no difference in the performances.
+Our Alternative Hypothesis $H_{a}$will be that Dynamic Cubes are faster the Query Rewrite, thus DC &lt; QR from an execution time point of view.
+As a level of confidence will choose the classical 95%, or an alpha value of 0.05.</p>
+
+<pre><code class="r">qr &lt;- testdata[which(testdata$technology == &quot;Query Rewrite&quot;),]$elapsed
+dc &lt;- testdata[which(testdata$technology == &quot;Dynamic Cubes&quot;),]$elapsed
+t.test(x = dc, y = qr, alternative = c(&quot;less&quot;))
+</code></pre>
+
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dc and qr
+## t = -3.4516, df = 134.69, p-value = 0.0003725
+## alternative hypothesis: true difference in means is less than 0
+## 95 percent confidence interval:
+##      -Inf -1.58342
+## sample estimates:
+## mean of x mean of y 
+##  10.00667  13.05083
+</code></pre>
+
+<p>If we look at the 95 percent confidence interval it has a value of (-Inf -1.58342). </p>
+
+<p>That means it doesn&#39;t contain 0, and the test
+has a p-value of 0.0003725, way lower than our \(\alpha\) value, thus we <strong>reject \(H_{0}\)</strong> in favor of <strong>\(H_{a}\)</strong> and can conclude that <strong>Dynamic Cubes is indeed faster than Query Rewrite</strong>.</p>
+
+<p>So no, these outliers are not enough to influence our decision, even if it&#39;s again work for us to try to make sure that we can guarantee as a high a cache hit ratio as possible, in order to make the difference even more significant. </p>
+
+<h3>Can we get rid of them?</h3>
+
+<p>We can, and that implies developing the necessary batch processes that can &ldquo;keep the cache warm&rdquo;, to use IBM&#39;s technology, right after the ETL process of the DWH has finished its job, before the users run the dashboard for the first time.</p>
+
+<h2>Conclusion</h2>
+
+<p>This method allowed us to give a professional answer to a real world question, without recurring to gut feeling or personal preferences. </p>
+
+<p>It didn&#39;t require us to invest to many resources in terms of time and developers and probably made the client spared some money preventing him from investing in the wrong technology.</p>
+
+<p>It also allowed us not only to establish which technology is better, but also to pinpoint some points that warrants our attention, like Query Rewrite first execution within a run lot and Dynamic Cubes outliers and cache misses, so it opened the field for further performance optimization and improvements being able to assert how important they are quantitatively.</p>
+
+</body>
+
+</html>
