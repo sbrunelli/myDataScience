@@ -57,9 +57,6 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <style type="text/css">
@@ -331,8 +328,8 @@ Can we get rid of them?</p>
 <p>For that we&#39;ll run a simple T-Test for the comparison of these two population means.
 It&#39;s a T test because we don&#39;t know the true populations standard deviations and we will estimate them using the sample standard deviations, therefore we have to account for that additional estimation error.</p>
 
-<p>Our NULL Hypothesis \(H_{0}\) will be that there is no difference in the performances.
-Our Alternative Hypothesis $H_{a}$will be that Dynamic Cubes are faster the Query Rewrite, thus DC &lt; QR from an execution time point of view.
+<p>Our NULL Hypothesis (H0) will be that there is no difference in the performances.
+Our Alternative Hypothesis (Ha) will be that Dynamic Cubes are faster the Query Rewrite, thus DC &lt; QR from an execution time point of view.
 As a level of confidence will choose the classical 95%, or an alpha value of 0.05.</p>
 
 <pre><code class="r">qr &lt;- testdata[which(testdata$technology == &quot;Query Rewrite&quot;),]$elapsed
@@ -356,7 +353,7 @@ t.test(x = dc, y = qr, alternative = c(&quot;less&quot;))
 <p>If we look at the 95 percent confidence interval it has a value of (-Inf -1.58342). </p>
 
 <p>That means it doesn&#39;t contain 0, and the test
-has a p-value of 0.0003725, way lower than our \(\alpha\) value, thus we <strong>reject \(H_{0}\)</strong> in favor of <strong>\(H_{a}\)</strong> and can conclude that <strong>Dynamic Cubes is indeed faster than Query Rewrite</strong>.</p>
+has a p-value of 0.0003725, way lower than our alpha value, thus we <strong>reject H0</strong> in favor of <strong>Ha</strong> and can conclude that <strong>Dynamic Cubes is indeed faster than Query Rewrite</strong>.</p>
 
 <p>So no, these outliers are not enough to influence our decision, even if it&#39;s again work for us to try to make sure that we can guarantee as a high a cache hit ratio as possible, in order to make the difference even more significant. </p>
 

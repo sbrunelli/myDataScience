@@ -140,8 +140,8 @@ Those outlier are all **cache misses**.
 For that we'll run a simple T-Test for the comparison of these two population means.
 It's a T test because we don't know the true populations standard deviations and we will estimate them using the sample standard deviations, therefore we have to account for that additional estimation error.
 
-Our NULL Hypothesis $H_{0}$ will be that there is no difference in the performances.
-Our Alternative Hypothesis $H_{a}$will be that Dynamic Cubes are faster the Query Rewrite, thus DC < QR from an execution time point of view.
+Our NULL Hypothesis (H0) will be that there is no difference in the performances.
+Our Alternative Hypothesis (Ha) will be that Dynamic Cubes are faster the Query Rewrite, thus DC < QR from an execution time point of view.
 As a level of confidence will choose the classical 95%, or an alpha value of 0.05.
 
 ```{r}
@@ -152,7 +152,7 @@ t.test(x = dc, y = qr, alternative = c("less"))
 If we look at the 95 percent confidence interval it has a value of (-Inf -1.58342). 
 
 That means it doesn't contain 0, and the test
-has a p-value of 0.0003725, way lower than our $\alpha$ value, thus we **reject $H_{0}$** in favor of **$H_{a}$** and can conclude that **Dynamic Cubes is indeed faster than Query Rewrite**.
+has a p-value of 0.0003725, way lower than our alpha value, thus we **reject H0** in favor of **Ha** and can conclude that **Dynamic Cubes is indeed faster than Query Rewrite**.
 
 So no, these outliers are not enough to influence our decision, even if it's again work for us to try to make sure that we can guarantee as a high a cache hit ratio as possible, in order to make the difference even more significant. 
 
