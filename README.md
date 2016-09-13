@@ -27,7 +27,7 @@ Here's the list of currently available examples:
 
 * [Logistic Regresssion](./logistic regression/project_steps.md): in this example I use logistic regression to build a predictive model for soccer results. This	a little more involved example because it starts from the collection of data from the web by means of a simple web scraper, to their preparation, to a step of feature enrichement and only then are the data used to fit a statistical model. As a last step the model is used against real data.
 
-* [Bayes Theorem](): in this example I use an already existing predictive model (ref. Logistic Regression), and I show how to use bayesian inference to incorporate events and increase the power of the model's predictions.
+* Bayes Theorem: in this example I use an already existing predictive model (ref. Logistic Regression), and I show how to use bayesian inference to incorporate events and increase the power of the model's predictions.
 	
 #Section 2: Business
 Here's the list of currently available real life applications of the techniques:
