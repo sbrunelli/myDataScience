@@ -1,0 +1,65 @@
+Ita,Sort,Eng,Colname
+Stagione                                                ,1,Season,sea
+Giornata                                                ,2,Game,gam
+Squadra                                                 ,3,Team,tea
+Avversaria                                              ,4,Opponent,opp
+Campo                                                   ,5,Venue,ven
+Gol segnati                                             ,6,Goals scored,gs
+Gol subiti                                              ,7,Goals allowed,ga
+Ammonizioni                                             ,1000,Yellow cards,yc
+Ammonizioni avversario                                  ,1001,Yellow cards opponent,yc_o
+Assist Totali                                           ,1002,Assists,ass
+Assist Totali avversario                                ,1003,Assists opponent,ass_o
+Attacchi a destra                                       ,1004,Right wing attacks,rwa
+Attacchi a destra avversario                            ,1005,Right wing attacks opponent,rwa_o
+Attacchi a sinistra                                     ,1006,Left wing attacks,lwa
+Attacchi a sinistra avversario                          ,1007,Left wing attacks opponent,lwa_o
+Attacchi centrali                                       ,1008,Central attacks,ca
+Attacchi centrali avversario                            ,1009,Central attacks opponent,ca_o
+Contropiede                                             ,1012,Counterattacks,cnt
+Contropiede avversario                                  ,1013,Counterattacks opponent,cnt_o
+Corner                                                  ,1014,Corner,cor
+Corner avversario                                       ,1015,Corner opponent,cor_o
+Cross                                                   ,1016,Crosses,cro
+Cross avversario                                        ,1017,Crosses opponent,cro_o
+Doppie ammonizioni                                      ,1018,Double yellow cards,dyc
+Doppie ammonizioni avversario                           ,1019,Double yellow cards opponent,dyc_o
+Espulsioni                                              ,1020,Red cards,rc
+Espulsioni avversario                                   ,1021,Red cards opponent,rc_o
+Falli subiti                                            ,1022,Fouls opponent,fou_o
+Falli subiti avversario                                 ,1023,Fouls,fou
+Fuorigioco                                              ,1024,Offsides,off
+Fuorigioco avversario                                   ,1025,Offsides opponent,off_o
+Lanci lunghi                                            ,1029,Long balls,lb
+Lanci lunghi avversario                                 ,1030,Long balls opponent,lb_o
+Occasioni da gol                                        ,1031,Goal chances,gc
+Occasioni da gol avversario                             ,1032,Goal chances opponent,gc_o
+Pali                                                    ,1033,Woodworks,ww
+Pali avversario                                         ,1034,Woodworks opponent,ww_o
+Palle perse                                             ,1035,Balls lost,bl
+Palle perse avversario                                  ,1036,Balls lost opponent,bl_o
+Palle recuperate                                        ,1037,Balls recovered,br
+Palle recuperate avversario                             ,1038,Balls recovered opponent,br_o
+Parate                                                  ,1039,Blocks,blk
+Parate avversario                                       ,1040,Blocks opponent,blk_o
+Possesso palla                                          ,1041,Possession,pos
+Possesso palla avversario                               ,1042,Possession opponent,pos_o
+Rigori                                                  ,1043,Penalties,pen
+Rigori avversario                                       ,1044,Penalties opponent,pen_o
+Tiri Totali                                             ,1047,Total shots,ts
+Tiri Totali avversario                                  ,1048,Total shots opponent,ts_o
+Tiri fuori                                              ,1049,Shots off target,shoff
+Tiri fuori avversario                                   ,1050,Shots off target opponent,shoff_o
+Tiri fuori da punizione                                 ,1051,Shots off from free kick,shofffk
+Tiri fuori da punizione avversario                      ,1052,Shots off from free kick opponent,shoffk_o
+Tiri fuori su azione da palla inattiva                  ,1053,Shots off from standard situations,shoffss
+Tiri fuori su azione da palla inattiva avversario       ,1054,Shots off from standard situations opponent,shoffss_o
+Tiri in porta                                           ,1055,Shots on goal,shon
+Tiri in porta avversario                                ,1056,Shots on goal opponent,shon_o
+Tiri in porta da area                                   ,1057,Shots on from the box,shoonb
+Tiri in porta da area avversario                        ,1058,Shots on from the box opponent,shoonb_o
+Tiri in porta da punizione                              ,1059,Shots on from free kick,shonfk
+Tiri in porta da punizione avversario                   ,1060,Shots on from free kick opponent,shonfk_o
+Tiri in porta su azione da palla inattiva               ,1061,Shots on from standard situation,shonss
+Tiri in porta su azione da palla inattiva avversario    ,1062,Shots on from standard situation opponent,shonss_o
+dummy                                                   ,1063,,
