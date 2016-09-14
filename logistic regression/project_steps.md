@@ -45,3 +45,13 @@ And then this:
 
 
 and I was like...that is perfect!!! All that I have to do now is write a web scraper to extract that information from this web site and I'm good to go. For that I used **python** and [here you can see the notebook](./Crawler.ipynb) with all the code and some additional comments.
+
+* **Integrating the data**: at this stage I want to integrate the data scraped for the diffent season into a single consistent view and prepare the final csv file that will be the input for the subsequent phases. For that there's another [notebook here](./Data Preparation) with code and comments.
+
+* **Exploratory Data Analysis**:
+
+* **Features Enrichment**:
+
+* **Fitting the Model**:
+
+* **Model in Action**:
