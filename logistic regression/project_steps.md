@@ -48,7 +48,7 @@ and I was like...that is perfect!!! All that I have to do now is write a web scr
 
 * **Integrating the data**: at this stage I want to integrate the data scraped for the diffent season into a single consistent view and prepare the final csv file that will be the input for the subsequent phases. For that there's another [notebook here](./Data Preparation.ipynb) with code and comments.
 
-* **Exploratory Data Analysis**:
+* **Exploratory Data Analysis**: in this phase I want to identify what are the candidate features that I can use to build the model. Ideally I want features with no NULL values and with a very rich information content. In this [document](./EDA.md) I explain the details of the selection process. 
 
 * **Features Enrichment**:
 
